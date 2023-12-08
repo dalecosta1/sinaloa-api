@@ -3,7 +3,7 @@ package repository
 import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	"gitlab.com/dalecosta1/sinaloa-api/entity"
+	"github.com/dalecosta1/sinaloa-api/entity"
 )
 
 type VideoRepository interface {

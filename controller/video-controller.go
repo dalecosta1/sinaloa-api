@@ -5,8 +5,8 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"gitlab.com/dalecosta1/sinaloa-api/entity"
-	"gitlab.com/dalecosta1/sinaloa-api/service"
+	"github.com/dalecosta1/sinaloa-api/entity"
+	"github.com/dalecosta1/sinaloa-api/service"
 	"gopkg.in/go-playground/validator.v9"
 )
 

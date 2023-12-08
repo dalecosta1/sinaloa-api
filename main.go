@@ -4,12 +4,12 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"gitlab.com/dalecosta1/sinaloa-api/api"
-	"gitlab.com/dalecosta1/sinaloa-api/controller"
-	"gitlab.com/dalecosta1/sinaloa-api/docs" // Swagger generated files
-	"gitlab.com/dalecosta1/sinaloa-api/middlewares"
-	"gitlab.com/dalecosta1/sinaloa-api/repository"
-	"gitlab.com/dalecosta1/sinaloa-api/service"
+	"github.com/dalecosta1/sinaloa-api/api"
+	"github.com/dalecosta1/sinaloa-api/controller"
+	"github.com/dalecosta1/sinaloa-api/docs" // Swagger generated files
+	"github.com/dalecosta1/sinaloa-api/middlewares"
+	"github.com/dalecosta1/sinaloa-api/repository"
+	"github.com/dalecosta1/sinaloa-api/service"
 
 	swaggerFiles "github.com/swaggo/files"     // swagger embed files
 	ginSwagger "github.com/swaggo/gin-swagger" // gin-swagger middleware
@@ -31,12 +31,12 @@ var (
 func main() {
 
 	// Swagger 2.0 Meta Information
-	docs.SwaggerInfo.Title = "Pragmatic Reviews - Video API"
-	docs.SwaggerInfo.Description = "Pragmatic Reviews - Youtube Video API."
-	docs.SwaggerInfo.Version = "1.0"
+	docs.SwaggerInfo.Title = "Sinaloa CLI APIs"
+	docs.SwaggerInfo.Description = "APIs to interact with the Sinaloa CLI, executing its commands."
+	docs.SwaggerInfo.Version = "0.1.0"
 	docs.SwaggerInfo.Host = "localhost:5000"
 	docs.SwaggerInfo.BasePath = "/api/v1"
-	docs.SwaggerInfo.Schemes = []string{"https"}
+	docs.SwaggerInfo.Schemes = []string{"http"}
 
 	defer videoRepository.CloseDB()
 

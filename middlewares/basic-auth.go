@@ -6,6 +6,6 @@ import "github.com/gin-gonic/gin"
 // the key is the user name and the value is the password.
 func BasicAuth() gin.HandlerFunc {
 	return gin.BasicAuth(gin.Accounts{
-		"pragmatic": "reviews",
+		"admin": "admin",
 	})
 }

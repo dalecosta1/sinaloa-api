@@ -1,8 +1,8 @@
 package service
 
 import (
-	"gitlab.com/dalecosta1/sinaloa-api/entity"
-	"gitlab.com/dalecosta1/sinaloa-api/repository"
+	"github.com/dalecosta1/sinaloa-api/entity"
+	"github.com/dalecosta1/sinaloa-api/repository"
 )
 
 type VideoService interface {

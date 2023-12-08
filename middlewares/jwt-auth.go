@@ -6,7 +6,7 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
-	"gitlab.com/dalecosta1/sinaloa-api/service"
+	"github.com/dalecosta1/sinaloa-api/service"
 )
 
 // AuthorizeJWT validates the token from the http request, returning a 401 if it's not valid

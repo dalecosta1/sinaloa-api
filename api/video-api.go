@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"gitlab.com/dalecosta1/sinaloa-api/controller"
-	"gitlab.com/dalecosta1/sinaloa-api/dto"
+	"github.com/dalecosta1/sinaloa-api/controller"
+	"github.com/dalecosta1/sinaloa-api/dto"
 )
 
 type VideoApi struct {

@@ -2,8 +2,8 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
-	"gitlab.com/dalecosta1/sinaloa-api/dto"
-	"gitlab.com/dalecosta1/sinaloa-api/service"
+	"github.com/dalecosta1/sinaloa-api/dto"
+	"github.com/dalecosta1/sinaloa-api/service"
 )
 
 type LoginController interface {

@@ -1,13 +1,44 @@
 # SINALOA-API
 
+REST APIs used to consume the sinaloa-cli commands.
+
+
 ## Go Module Init
 
 ```bash
-go mod init gitlab.com/dalecosta1/sinaloa-api
+go mod init github.com/dalecosta1/sinaloa-api
 go mod tidy
 ```
 
-## Gin-Gonic library: github.com/gin-gonic/gin
+
+# Go modules & libraries
+
+## Install Swagger Library
+
+```bash
+go install github.com/swaggo/swag/cmd/swag
+```
+
+## Install Gin-gogin
+
+```bash
+go get -u github.com/gin-gonic/gin
+```
+
+## Get references
+
+```bash
+go get -u github.com/gin-gonic/gin
+go get -u github.com/swaggo/files
+go get -u github.com/swaggo/gin-swagger
+go get -u github.com/dalecosta1/sinaloa-api/api
+go get -u github.com/dalecosta1/sinaloa-api/controller
+go get -u github.com/dalecosta1/sinaloa-api/docs
+go get -u github.com/dalecosta1/sinaloa-api/middlewares
+go get -u github.com/dalecosta1/sinaloa-api/repository
+go get -u github.com/dalecosta1/sinaloa-api/service
+```
+
 
 ## Run
 
@@ -15,13 +46,6 @@ go mod tidy
 go run server.go
 ```
 
-# Swagger Documentation
-
-## Install Swagger Library
-
-```bash
-go install github.com/swaggo/swag/cmd/swag
-```
 
 ## Generate Swagger Documentation
 

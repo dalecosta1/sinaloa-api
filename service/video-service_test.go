@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"gitlab.com/dalecosta1/sinaloa-api/entity"
-	"gitlab.com/dalecosta1/sinaloa-api/repository"
+	"github.com/dalecosta1/sinaloa-api/entity"
+	"github.com/dalecosta1/sinaloa-api/repository"
 )
 
 const (
