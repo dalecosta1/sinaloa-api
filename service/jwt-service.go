@@ -28,7 +28,7 @@ type jwtService struct {
 func NewJWTService() JWTService {
 	return &jwtService{
 		secretKey: getSecretKey(),
-		issuer:    "pragmaticreviews.com",
+		issuer:    "dalecosta.com",
 	}
 }
 

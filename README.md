@@ -25,6 +25,12 @@ go install github.com/swaggo/swag/cmd/swag
 go get -u github.com/gin-gonic/gin
 ```
 
+## Install Godotenv
+
+```bash
+go install github.com/joho/godotenv/cmd/godotenv@latest
+```
+
 ## Get references
 
 ```bash
@@ -37,13 +43,14 @@ go get -u github.com/dalecosta1/sinaloa-api/docs
 go get -u github.com/dalecosta1/sinaloa-api/middlewares
 go get -u github.com/dalecosta1/sinaloa-api/repository
 go get -u github.com/dalecosta1/sinaloa-api/service
+go get -u github.com/joho/godotenv
 ```
 
 
 ## Run
 
 ```bash
-go run server.go
+go run main.go
 ```
 
 

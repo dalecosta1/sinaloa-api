@@ -8,6 +8,8 @@
 docs/*
 docs
 test.db
+envs
+.env
 
 # Binaries
 *.exe

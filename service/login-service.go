@@ -1,5 +1,12 @@
 package service
 
+import (
+	"os"
+	"fmt"
+
+	"github.com/joho/godotenv"
+)
+
 type LoginService interface {
 	Login(username string, password string) bool
 }
@@ -10,9 +17,15 @@ type loginService struct {
 }
 
 func NewLoginService() LoginService {
+	// Load .env file
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println("[ERROR] Error loading .env file:", err)
+	}
+	// Set basic auth username and password
 	return &loginService{
-		authorizedUsername: "admin",
-		authorizedPassword: "admin",
+		authorizedUsername: os.Getenv("BASIC_AUTH_USER"),
+		authorizedPassword: os.Getenv("BASIC_AUTH_PASSWORD"),
 	}
 }
 
