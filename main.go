@@ -11,7 +11,7 @@ import (
 	"github.com/dalecosta1/sinaloa-api/middlewares"
 	"github.com/dalecosta1/sinaloa-api/repository"
 	"github.com/dalecosta1/sinaloa-api/service"
-	"github.com/dalecosta1/sinaloa-api/helper/config"
+	"github.com/dalecosta1/sinaloa-api/helpers/config"
 	
 	swaggerFiles "github.com/swaggo/files"     // swagger embed files
 	ginSwagger "github.com/swaggo/gin-swagger" // gin-swagger middleware

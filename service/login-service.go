@@ -4,7 +4,7 @@ import (
 	"os"
 	"fmt"
 
-	"github.com/dalecosta1/sinaloa-api/helper/config"
+	"github.com/dalecosta1/sinaloa-api/helpers/config"
 )
 
 type LoginService interface {
