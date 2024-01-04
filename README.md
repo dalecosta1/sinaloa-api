@@ -44,7 +44,6 @@ go get -u github.com/dalecosta1/sinaloa-api/middlewares
 go get -u github.com/dalecosta1/sinaloa-api/repository
 go get -u github.com/dalecosta1/sinaloa-api/service
 go get -u github.com/joho/godotenv
-go get github.com/dalecosta1/sinaloa-api/helper/config
 ```
 
 
