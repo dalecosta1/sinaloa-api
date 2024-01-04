@@ -4,7 +4,7 @@ import (
 	"os"
 	"fmt"
 
-	"github.com/joho/godotenv"
+	"github.com/dalecosta1/sinaloa-api/helper/config"
 )
 
 type LoginService interface {
@@ -17,15 +17,10 @@ type loginService struct {
 }
 
 func NewLoginService() LoginService {
-	// Load .env file
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Println("[ERROR] Error loading .env file:", err)
-	}
 	// Set basic auth username and password
 	return &loginService{
-		authorizedUsername: os.Getenv("BASIC_AUTH_USER"),
-		authorizedPassword: os.Getenv("BASIC_AUTH_PASSWORD"),
+		authorizedUsername: config.AppConfig.BASIC_AUTH_USER,
+		authorizedPassword: config.AppConfig.BASIC_AUTH_PASSWORD,
 	}
 }
 

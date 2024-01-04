@@ -11,8 +11,7 @@ import (
 	"github.com/dalecosta1/sinaloa-api/middlewares"
 	"github.com/dalecosta1/sinaloa-api/repository"
 	"github.com/dalecosta1/sinaloa-api/service"
-
-	"github.com/joho/godotenv"
+	"github.com/dalecosta1/sinaloa-api/helper/config"
 	
 	swaggerFiles "github.com/swaggo/files"     // swagger embed files
 	ginSwagger "github.com/swaggo/gin-swagger" // gin-swagger middleware
@@ -32,30 +31,12 @@ var (
 // @in header
 // @name Authorization
 func main() {
-    // Load .env file
-    err := godotenv.Load()
-    if err != nil {
-        fmt.Println("[ERROR] Error loading .env file:", err)
-    }
-
-	// CHeck if args are accepted or get from env
-	isArgsEnabled := os.Getenv("ARGS_ENABLED")
-	if isArgsEnabled == "true" {
-		os.Setenv("PORT", os.Args[1])
-		os.Setenv("SWAGGER_ENABLED", os.Args[2])
-		os.Setenv("BASIC_AUTH_USER", os.Args[3])
-		os.Setenv("BASIC_AUTH_USER", os.Args[4])
-		os.Setenv("JWT_SECRET", os.Args[5])
-	}
+	// Load .env file
+	config.LoadConfig()
 
 	// We need to setup this env variable from the env variables
 	port := os.Getenv("PORT")
 	isSwaggerEnabled := os.Getenv("SWAGGER_ENABLED")
-
-	// Elastic Beanstalk forwards requests to port 5000
-	if port == "" {
-		port = "5000"
-	}
 
 	// Swagger 2.0 Meta Information
 	docs.SwaggerInfo.Title = "Sinaloa CLI APIs"
