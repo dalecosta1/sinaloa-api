@@ -1,10 +1,7 @@
 package service
 
 import (
-	"os"
-	"fmt"
-
-	"github.com/dalecosta1/sinaloa-api/helpers/config"
+	"github.com/dalecosta1/sinaloa-api/helpers"
 )
 
 type LoginService interface {
@@ -17,10 +14,12 @@ type loginService struct {
 }
 
 func NewLoginService() LoginService {
+	// Load the config
+	helpers.LoadConfig()
 	// Set basic auth username and password
 	return &loginService{
-		authorizedUsername: config.AppConfig.BASIC_AUTH_USER,
-		authorizedPassword: config.AppConfig.BASIC_AUTH_PASSWORD,
+		authorizedUsername: helpers.AppConfig.BASIC_AUTH_USER,
+		authorizedPassword: helpers.AppConfig.BASIC_AUTH_PASSWORD,
 	}
 }
 

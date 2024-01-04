@@ -1,8 +1,7 @@
 package main
 
 import (
-	"os"
-	"fmt"
+    "fmt"
 
 	"github.com/gin-gonic/gin"
 	"github.com/dalecosta1/sinaloa-api/api"
@@ -11,7 +10,7 @@ import (
 	"github.com/dalecosta1/sinaloa-api/middlewares"
 	"github.com/dalecosta1/sinaloa-api/repository"
 	"github.com/dalecosta1/sinaloa-api/service"
-	"github.com/dalecosta1/sinaloa-api/helpers/config"
+	"github.com/dalecosta1/sinaloa-api/helpers"
 	
 	swaggerFiles "github.com/swaggo/files"     // swagger embed files
 	ginSwagger "github.com/swaggo/gin-swagger" // gin-swagger middleware
@@ -31,17 +30,20 @@ var (
 // @in header
 // @name Authorization
 func main() {
-	// Load .env file
-	config.LoadConfig()
+	// Load the config
+	helpers.LoadConfig()
+
+	// Print the version
+	fmt.Println("\nSinaloa CLI API v" + helpers.AppConfig.VERSION + "\n")
 
 	// We need to setup this env variable from the env variables
-	port := os.Getenv("PORT")
-	isSwaggerEnabled := os.Getenv("SWAGGER_ENABLED")
+	port := helpers.AppConfig.PORT // Use helpers.AppConfig
+	isSwaggerEnabled := helpers.AppConfig.SWAGGER_ENABLED // Use helpers.AppConfig
 
 	// Swagger 2.0 Meta Information
 	docs.SwaggerInfo.Title = "Sinaloa CLI APIs"
 	docs.SwaggerInfo.Description = "APIs to interact with the Sinaloa CLI, executing its commands."
-	docs.SwaggerInfo.Version = "0.1.0"
+	docs.SwaggerInfo.Version = helpers.AppConfig.VERSION // Use helpers.AppConfig
 	docs.SwaggerInfo.Host = "localhost:" + port
 	docs.SwaggerInfo.BasePath = "/api/v1"
 	docs.SwaggerInfo.Schemes = []string{"http"}
