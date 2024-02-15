@@ -2,6 +2,7 @@ package helpers
 
 import (
     "fmt"
+    "runtime"
     "os"
 	"io/ioutil"
 	"encoding/json"
@@ -13,6 +14,7 @@ import (
 
 type Config struct {
     VERSION             string
+    SINALOA_API_DEBUG   string
     PORT                string
     SWAGGER_ENABLED     string
     BASIC_AUTH_USER     string
@@ -42,6 +44,7 @@ func LoadConfig() {
 	// Set values to AppConfig
 	AppConfig = Config{
 		VERSION:             version,
+        SINALOA_API_DEBUG:   os.Getenv("SINALOA_API_DEBUG"),
 		PORT:                os.Getenv("PORT"),
 		SWAGGER_ENABLED:     os.Getenv("SWAGGER_ENABLED"),
 		BASIC_AUTH_USER:     os.Getenv("BASIC_AUTH_USER"),
@@ -92,4 +95,14 @@ func GetVersion() (string, error) {
 
 	// Return the version
     return version, nil
+}
+
+// GetErrorLocation returns a string representing the error location
+func GetErrorLocation() string {
+    _, file, line, ok := runtime.Caller(1)
+    if ok {
+        return fmt.Sprintf("Error in file %s at line %d", file, line)
+    } else {
+        return "Error location unknown"
+    }
 }

@@ -8,7 +8,6 @@ import (
 	"github.com/dalecosta1/sinaloa-api/controller"
 	"github.com/dalecosta1/sinaloa-api/docs" // Swagger generated files
 	"github.com/dalecosta1/sinaloa-api/middlewares"
-	"github.com/dalecosta1/sinaloa-api/repository"
 	"github.com/dalecosta1/sinaloa-api/service"
 	"github.com/dalecosta1/sinaloa-api/helpers"
 	
@@ -17,10 +16,10 @@ import (
 )
 
 var (
-	videoRepository repository.VideoRepository = repository.NewVideoRepository()
-	videoService    service.VideoService       = service.New(videoRepository)
-	loginService    service.LoginService       = service.NewLoginService()
-	jwtService      service.JWTService         = service.NewJWTService()
+    pythonMiddleware 		*middlewares.PythonMiddleware
+	argocdManagerService    service.ArgocdManagerService       = service.NewArgocdManagerService(pythonMiddleware)
+	loginService    		service.LoginService       		   = service.NewLoginService()
+	jwtService      		service.JWTService         		   = service.NewJWTService()
 
 	videoController controller.VideoController = controller.New(videoService)
 	loginController controller.LoginController = controller.NewLoginController(loginService, jwtService)
@@ -38,35 +37,34 @@ func main() {
 
 	// We need to setup this env variable from the env variables
 	port := helpers.AppConfig.PORT // Use helpers.AppConfig
-	isSwaggerEnabled := helpers.AppConfig.SWAGGER_ENABLED // Use helpers.AppConfig
+	isSwaggerEnabled := helpers.AppConfig.SWAGGER_ENABLED
 
 	// Swagger 2.0 Meta Information
-	docs.SwaggerInfo.Title = "Sinaloa CLI APIs"
+	docs.SwaggerInfo.Title = "Sinaloa APIs"
 	docs.SwaggerInfo.Description = "APIs to interact with the Sinaloa CLI, executing its commands."
-	docs.SwaggerInfo.Version = helpers.AppConfig.VERSION // Use helpers.AppConfig
+	docs.SwaggerInfo.Version = helpers.AppConfig.VERSION
 	docs.SwaggerInfo.Host = "localhost:" + port
 	docs.SwaggerInfo.BasePath = "/api/v1"
 	docs.SwaggerInfo.Schemes = []string{"http"}
 
-	defer videoRepository.CloseDB()
-
 	server := gin.Default()
 
 	videoAPI := api.NewVideoAPI(loginController, videoController)
+	loginAPI := api.NewLoginAPI(loginController)
 
 	apiRoutes := server.Group(docs.SwaggerInfo.BasePath)
 	{
 		login := apiRoutes.Group("/auth")
 		{
-			login.POST("/token", videoAPI.Authenticate)
+			login.POST("/token", loginAPI.Authenticate)
 		}
 
-		videos := apiRoutes.Group("/videos", middlewares.AuthorizeJWT())
+		argocdManager := apiRoutes.Group("/argocd-manager", middlewares.AuthorizeJWT())
 		{
-			videos.GET("", videoAPI.GetVideos)
-			videos.POST("", videoAPI.CreateVideo)
-			videos.PUT(":id", videoAPI.UpdateVideo)
-			videos.DELETE(":id", videoAPI.DeleteVideo)
+			argocdManager.POST("get", videoAPI.GetVideos)
+			argocdManager.POST("create", videoAPI.CreateVideo)
+			argocdManager.POST("update", videoAPI.UpdateVideo)
+			argocdManager.POST("delete", videoAPI.DeleteVideo)
 		}
 	}
 
