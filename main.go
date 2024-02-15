@@ -16,12 +16,13 @@ import (
 )
 
 var (
-    pythonMiddleware 		*middlewares.PythonMiddleware
+	pythonMiddleware       	= middlewares.NewPythonMiddleware()
+
 	argocdManagerService    service.ArgocdManagerService       = service.NewArgocdManagerService(pythonMiddleware)
 	loginService    		service.LoginService       		   = service.NewLoginService()
 	jwtService      		service.JWTService         		   = service.NewJWTService()
 
-	videoController controller.VideoController = controller.New(videoService)
+	argocdManagerController controller.ArgocdManagerController = controller.NewArgocdManagerController(argocdManagerService)
 	loginController controller.LoginController = controller.NewLoginController(loginService, jwtService)
 )
 
@@ -49,7 +50,7 @@ func main() {
 
 	server := gin.Default()
 
-	videoAPI := api.NewVideoAPI(loginController, videoController)
+	argocdManagerAPI := api.NewArgocdManagerAPI(argocdManagerController)
 	loginAPI := api.NewLoginAPI(loginController)
 
 	apiRoutes := server.Group(docs.SwaggerInfo.BasePath)
@@ -61,10 +62,10 @@ func main() {
 
 		argocdManager := apiRoutes.Group("/argocd-manager", middlewares.AuthorizeJWT())
 		{
-			argocdManager.POST("get", videoAPI.GetVideos)
-			argocdManager.POST("create", videoAPI.CreateVideo)
-			argocdManager.POST("update", videoAPI.UpdateVideo)
-			argocdManager.POST("delete", videoAPI.DeleteVideo)
+			//argocdManager.POST("get", videoAPI.GetVideos)
+			argocdManager.POST("create", argocdManagerAPI.Create)
+			//argocdManager.POST("update", videoAPI.UpdateVideo)
+			//argocdManager.POST("delete", videoAPI.DeleteVideo)
 		}
 	}
 

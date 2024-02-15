@@ -11,15 +11,15 @@ type ArgocdManagerService interface {
 }
 
 type argocdManagerService struct {
-    pyExecutor interfaces.PythonExecutor
+    pyExecutor interfaces.Executor
 }
 
-func NewArgocdManagerService(executor interfaces.PythonExecutor) ArgocdManagerService {
+func NewArgocdManagerService(executor interfaces.Executor) ArgocdManagerService {
     return &argocdManagerService{
         pyExecutor: executor,
     }
 }
 
 func (service *argocdManagerService) MultiActions(rawJSON json.RawMessage) (interface{}, error) {
-    return service.pyExecutor.ExecutePyFn(rawJSON, "api_module", "multi_actions")
+    return service.pyExecutor.ExecuteCmd(string(rawJSON), "multi_actions.py", "python3")
 }

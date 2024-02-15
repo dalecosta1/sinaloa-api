@@ -12,7 +12,7 @@ type ArgocdManagerApi struct {
 	argocdManagerController controller.ArgocdManagerController
 }
 
-func NewArgocdManagerApi(argocdManagerController controller.ArgocdManagerController) *ArgocdManagerApi {
+func NewArgocdManagerAPI(argocdManagerController controller.ArgocdManagerController) *ArgocdManagerApi {
 	return &ArgocdManagerApi{
 		argocdManagerController: argocdManagerController,
 	}
